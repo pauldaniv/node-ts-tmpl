@@ -1,12 +1,10 @@
 import express from 'express';
+import wsService from './services/infra/websocket.service';
+import { appConf } from "./config/app-config";
 import chalk from 'chalk';
 
 const app: express.Application = express();
-
-const wsService = require('./services/infra/websocket.service');
 wsService.appWss(app);
-
-const {appConf} = require('./config/app-config');
 
 app.use(
   require('body-parser').json(),
