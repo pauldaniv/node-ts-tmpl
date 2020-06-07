@@ -1,0 +1,15 @@
+
+env_variables:
+  DB_USERNAME: $db_username
+  DB_PASSWORD: '$db_password'
+  DB_DIALECT: $db_dialect
+  DB_NAME: $db_name
+  DB_PORT: $db_port
+  DB_HOST: $db_host
+
+  NC_COUNT_THRESHOLD: $nc_count_threshold
+  NC_TIME_THRESHOLD: $nc_time_threshold
+  NC_SCHEDULE_TIME: $nc_schedule_time
+  NC_SCHEDULE_ENABLED: '$nc_schedule_enabled'
+
+  SESSION_SECRET: $session_secret

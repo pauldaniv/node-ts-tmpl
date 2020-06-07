@@ -1,0 +1,56 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "env": {
+    "browser" : true,
+    "node": true,
+    "amd": true,
+    "es6": true
+  },
+  "rules": {
+    "no-unused-vars": 2,
+    "no-undef": 2,
+    "indent": [
+      "error",
+      2
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true
+      }
+    ],
+    "no-bitwise": "off",
+    "no-lonely-if": "off",
+    "class-methods-use-this": "off",
+    "arrow-body-style": "off",
+    "no-loop-func": "off",
+    "no-restricted-globals": "off",
+    "no-underscore-dangle": "off",
+    "prefer-destructuring": [
+      "error",
+      {
+        "VariableDeclarator": {
+          "array": false,
+          "object": true
+        }
+      },
+      {
+        "enforceForRenamedProperties": false
+      }
+    ]
+  },
+  "ecmaFeatures": {
+    "modules": true,
+    "spread": true,
+    "restParams": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  }
+}
