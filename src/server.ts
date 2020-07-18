@@ -3,7 +3,7 @@ import wsService from './services/infra/websocket.service';
 import { appConf } from "./config/app-config";
 import chalk from 'chalk';
 
-const app: express.Application = express();
+const app = express();
 wsService.appWss(app);
 
 app.use(
@@ -12,18 +12,7 @@ app.use(
   require('./controllers'),
   require('./handler/exceptions/handler')
 );
-app.use("/a", (req, res) => {
-  console.log("test");
-  res.send("hello there")
-});
-app.use("/e", (req, res) => {
-  console.log("test");
-  res.send("hello there")
-});
-app.use("/test", (req, res) => {
-  console.log("test");
-  res.send("hello there")
-});
+
 app.listen(appConf.port, () => {
   const chalk = require('chalk');
   console.log(chalk.cyan('[env]'), process.env.NODE_ENV === 'development'
