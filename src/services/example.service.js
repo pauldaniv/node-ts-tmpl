@@ -7,7 +7,7 @@ const Example = models.example;
 const {roles} = require('../config/app-config');
 
 async function getAll() {
-  return result;
+  return [{message: 'hello'}];
 }
 
 async function getOne(userDetails, exampleId) {
