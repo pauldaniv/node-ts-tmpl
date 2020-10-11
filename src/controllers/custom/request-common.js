@@ -6,11 +6,16 @@ module.exports = {
   handle: toBeCalled => {
     return async (req, res, next) => {
       try {
-        const result = toBeCalled(req, res);
-        if (result instanceof Promise) {
-          return result
-            .then(data => res.send(data))
-            .catch(err => next(err));
+        if (typeof toBeCalled === 'function') {
+          const result = toBeCalled(req, res);
+          if (result instanceof Promise) {
+            return result
+              .then(data => res.send(data))
+              .catch(err => next(err));
+          }
+          return res.send(result);
+        } else {
+          res.send(toBeCalled);//actually, don't call, just return
         }
       } catch (e) {
         return next(e);
