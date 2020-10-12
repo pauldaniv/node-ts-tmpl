@@ -3,18 +3,22 @@ import wsService from './services/infra/websocket.service';
 import { appConf } from "./config/app-config";
 import chalk from 'chalk';
 
+import bodyParser from "body-parser";
+import config from "./config/security-config";
+import controllers from "./controllers";
+import handler from "./handler/exceptions/handler";
+
 const app = express();
 wsService.appWss(app);
 
 app.use(
-  require('body-parser').json(),
-  require('./config/security-config'),
-  require('./controllers'),
-  require('./handler/exceptions/handler')
+  bodyParser.json(),
+  config,
+  controllers,
+  handler
 );
 
 app.listen(appConf.port, () => {
-  const chalk = require('chalk');
   console.log(chalk.cyan('[env]'), process.env.NODE_ENV === 'development'
     ? chalk.green('development')
     : chalk.redBright('PRODUCTION'));

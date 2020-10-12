@@ -5,7 +5,7 @@ import fs from "fs-extra";
 import uglify from "uglify-js";
 
 const tsconfig = JSON.parse(fs.readFileSync(`${__dirname}/../tsconfig.json`).toString().replace(/\s+\/[\/*].*/g, ''));
-const outDir = tsconfig.compilerOptions.outDir;
+const {outDir} = tsconfig.compilerOptions;
 const basePath = `${__dirname}/../${outDir}`;
 
 minify();
@@ -19,7 +19,7 @@ function minify(file = '') {
     fs.removeSync(path);
     fs.mkdirpSync(dirname(targetFile));
     fs.writeFileSync(targetFile, result.code);
-  } else fs.readdirSync(path).forEach((it) => minify(`${file}/${it}`))
+  } else fs.readdirSync(path).forEach((it) => minify(`${file}/${it}`));
 }
 
 // const minifyBaseDir = `${__dirname}/../${outDir.replace(/\/.*/, '')}/min`;

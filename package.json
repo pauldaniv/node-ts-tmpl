@@ -8,9 +8,10 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "build-min": "npm run build && npm run minify",
     "tsc:watch": "tsc -w --preserveWatchOutput",
     "watch": "tsnd --no-notify src/server.ts",
-    "start": "npm run minify && ts-node src/server.ts",
+    "start": "ts-node src/server.ts",
     "watch:ts": "nodemon --inspect --watch src --ext 'ts,js' --exec npm start",
     "serve": "node target/server.js",
     "test": "jest --forceExit --coverage --verbose",
