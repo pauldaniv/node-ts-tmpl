@@ -28,7 +28,7 @@
     "db:init": "npm run genconf-js && sequelize db:migrate --migrations-path ./src/sequelize/dmp/migrate; npm run db:seed && npm run db:seed:all",
     "db:dump": "npm run db:migrate && scripts/create_local_db_dump.js",
     "db:recreate": "npm run genconf-js && npm run db:init",
-    "minify": "scripts/minify.ts"
+    "minify": "ts-node scripts/minify.ts"
   },
   "engines": {
     "node": ">=14.0.0"
