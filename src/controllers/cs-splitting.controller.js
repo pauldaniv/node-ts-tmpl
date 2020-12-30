@@ -6,7 +6,8 @@ const {handle} = require('./custom/request-common');
 
 const path = '/api/csv-splitting';
 
-router.post(path, handle(async (req) => ({chunks: getChunks(req.body.data, req.query.chunkSize)})));
+router.post(path,
+  handle(async (req) => getChunks(req.body.data, req.query.chunkSize)));
 
 function getChunks(csv, chunkSize) {
   const charArray = csv.split(/(?=[\s\S])/u);
@@ -29,12 +30,12 @@ function getChunks(csv, chunkSize) {
     }
     offset += item;
   }
-  console.log(chunks.length);
-  return chunks;
+  return {totalBytes: charSizes.reduce((a, b) => a + b, 0), chunks};
 }
 
 function makeChunk(charArray, start, end) {
-  return charArray.slice(start, end).reduce((a, b) => a.concat(b), "");
+  const chunk = charArray.slice(start, end).reduce((a, b) => a.concat(b), "");
+  return {data: chunk, byteCount: countBytes(chunk)};
 }
 
 function countBytes(char) {
