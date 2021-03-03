@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<a id="connect">Allow Facebook Page Data Processing</a>
+<br/>
+<textarea id='demo' style="width: 1000px; height: 900px">No page loaded</textarea>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  const hashIndex = window.location.href.indexOf("#");
+  let redirectUrl = window.location.href;
+  if (hashIndex !== -1) {
+    redirectUrl = window.location.href.substring(0, hashIndex);
+  }
+
+
+  document.getElementById("connect").href = `https://www.facebook.com/v10.0/dialog/oauth?response_type=token&display=popup&client_id=${clientId}&redirect_uri=${redirectUrl}&scope=pages_show_list%2Cpages_read_engagement%2Cpages_read_user_content%2Cpublic_profile`;
+
+  let hash = window.location.hash.substring(1);
+
+  let result = hash.split('&').reduce(function (res, item) {
+    let parts = item.split('=');
+    res[parts[0]] = parts[1];
+    return res;
+  }, {});
+  if (result.hasOwnProperty('access_token')) {
+    axios({
+      url: 'http://localhost:8000/api/read_page_data',
+      method: 'post',
+      data: result
+    }).then(response => {
+      document.getElementById("demo").innerHTML = JSON.stringify(response.data, null, 2);
+    });
+  }
+</script>
+</body>
+</html>
