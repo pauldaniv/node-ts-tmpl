@@ -22,7 +22,7 @@ router.use(path, handle(async req => {
   const longLivedPageAccessTokensResponse = await axios.get(`https://graph.facebook.com/v10.0/${userId}/accounts?access_token=${longLivedUserAccessTokenResponse.data.access_token}`);
 
   for (const it of longLivedPageAccessTokensResponse.data.data) {
-    const pageInfo = await axios.get(`https://graph.facebook.com/v10.0/${it.id}?fields=about%2Cbio%2Chours%2Clink%2Cname%2Cphone%2Cschedule%2Cwebsite%2Clikes%7Bratings.limit(10)%7Bhas_rating%2Crating%2Crecommendation_type%2Chas_review%2Copen_graph_story%2Ccreated_time%2Creview_text%2Creviewer%7D%2Cemails%7D%2Cemails%2Cratings.limit(10)%7Bopen_graph_story%2Crating%2Chas_review%2Creview_text%2Crecommendation_type%2Chas_rating%2Ccreated_time%2Creviewer%7D&access_token=${it.access_token}`);
+    const pageInfo = await axios.get(`https://graph.facebook.com/v10.0/${it.id}?fields=id,category_list,ratings.limit(10){reviewer,rating,has_rating,has_review,created_time,open_graph_story,recommendation_type,review_text},tagged.limit(10),about,bio,hours,is_permanently_closed,is_unclaimed,name,phone,photos{target,images},price_range,website,emails,network,location,link,rating_count,parking,overall_star_rating,app_id,username&access_token=${it.access_token}`);
     response.pages.push({pageId: it.id, pageName: it.name, longLivedPageAccessToken: it.access_token, pageInfo: pageInfo.data});
   }
 
