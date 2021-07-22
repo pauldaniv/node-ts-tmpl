@@ -66,7 +66,7 @@
     "sequelize-cli-typescript": "^3.2.0-c",
     "ssh2-sftp-client": "^4.3.0",
     "ws": "^7.2.0",
-    "xlsx": "^0.14.4"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.1",
